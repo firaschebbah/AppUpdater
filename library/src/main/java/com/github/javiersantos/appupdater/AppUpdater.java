@@ -40,6 +40,7 @@ public class AppUpdater implements IAppUpdater {
     private Boolean isDialogCancelable;
 
     public AppUpdater(Context context) {
+        System.out.println("firas");
         this.context = context;
         this.libraryPreferences = new LibraryPreferences(context);
         this.display = Display.DIALOG;
