@@ -43,7 +43,7 @@ class ParserJSON {
             update.setLatestVersion(json.getString(KEY_LATEST_VERSION).trim());
             update.setLatestVersionCode(json.optInt(KEY_LATEST_VERSION_CODE));
             update.setForce(json.getBoolean(KEY_FORCE));
-            System.out.println(" from firas parse json "+ update.isForce().toString());
+            System.out.println(" from firas parse json 1"+ update.isForce().toString());
 
             JSONArray releaseArr = json.optJSONArray(KEY_RELEASE_NOTES);
             if (releaseArr != null) {
