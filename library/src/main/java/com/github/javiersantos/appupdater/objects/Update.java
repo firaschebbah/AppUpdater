@@ -6,6 +6,7 @@ public class Update {
     private String version;
     private Integer versionCode;
     private String releaseNotes;
+    private Boolean force;
     private URL apk;
 
     public Update() {}
@@ -26,9 +27,36 @@ public class Update {
         this.releaseNotes = releaseNotes;
     }
 
+    public Boolean isForce() {
+        return force;
+    }
+
+    public void setForce(Boolean force) {
+        this.force = force;
+    }
+
+    public Update(String version, Integer versionCode, String releaseNotes, Boolean force, URL apk) {
+        this.version = version;
+        this.versionCode = versionCode;
+        this.releaseNotes = releaseNotes;
+        this.force = force;
+        this.apk = apk;
+    }
+
     public Update(String latestVersion, Integer latestVersionCode, String releaseNotes, URL apk) {
         this(latestVersion, releaseNotes, apk);
         this.versionCode = latestVersionCode;
+    }
+
+    @Override
+    public String toString() {
+        return "Update{" +
+                "version='" + version + '\'' +
+                ", versionCode=" + versionCode +
+                ", releaseNotes='" + releaseNotes + '\'' +
+                ", force=" + force +
+                ", apk=" + apk +
+                '}';
     }
 
     public String getLatestVersion() {

@@ -24,6 +24,7 @@ class ParserJSON {
     private static final String KEY_LATEST_VERSION_CODE = "latestVersionCode";
     private static final String KEY_RELEASE_NOTES = "releaseNotes";
     private static final String KEY_URL = "url";
+    private static final String KEY_FORCE = "force";
 
     public ParserJSON(String url) {
         try {
@@ -41,6 +42,8 @@ class ParserJSON {
             Update update = new Update();
             update.setLatestVersion(json.getString(KEY_LATEST_VERSION).trim());
             update.setLatestVersionCode(json.optInt(KEY_LATEST_VERSION_CODE));
+            update.setForce(json.getBoolean(KEY_FORCE));
+
             JSONArray releaseArr = json.optJSONArray(KEY_RELEASE_NOTES);
             if (releaseArr != null) {
                 StringBuilder builder = new StringBuilder();

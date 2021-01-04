@@ -40,7 +40,7 @@ public class AppUpdater implements IAppUpdater {
     private Boolean isDialogCancelable;
 
     public AppUpdater(Context context) {
-        System.out.println("firas");
+        System.out.println("firas from AppUpdater");
         this.context = context;
         this.libraryPreferences = new LibraryPreferences(context);
         this.display = Display.DIALOG;
@@ -341,12 +341,26 @@ public class AppUpdater implements IAppUpdater {
                     if (UtilsLibrary.isAbleToShow(successfulChecks, showEvery)) {
                         switch (display) {
                             case DIALOG:
-                                final DialogInterface.OnClickListener updateClickListener = btnUpdateClickListener == null ? new UpdateClickListener(context, updateFrom, update.getUrlToDownload()) : btnUpdateClickListener;
-                                final DialogInterface.OnClickListener disableClickListener = btnDisableClickListener == null ? new DisableClickListener(context) : btnDisableClickListener;
+                                if (update.isForce())
+                                {
+                                    setButtonDismiss(null);
+                                    setButtonDoNotShowAgain(null);
 
-                                alertDialog = UtilsDisplay.showUpdateAvailableDialog(context, titleUpdate, getDescriptionUpdate(context, update, Display.DIALOG), btnDismiss, btnUpdate, btnDisable, updateClickListener, btnDismissClickListener, disableClickListener);
-                                alertDialog.setCancelable(isDialogCancelable);
-                                alertDialog.show();
+                                    final DialogInterface.OnClickListener updateClickListener = btnUpdateClickListener == null ? new UpdateClickListener(context, updateFrom, update.getUrlToDownload()) : btnUpdateClickListener;
+                                    final DialogInterface.OnClickListener disableClickListener = btnDisableClickListener == null ? new DisableClickListener(context) : btnDisableClickListener;
+
+                                    alertDialog = UtilsDisplay.showUpdateAvailableDialog(context, titleUpdate, getDescriptionUpdate(context, update, Display.DIALOG), btnDismiss, btnUpdate, btnDisable, updateClickListener, btnDismissClickListener, disableClickListener);
+                                    alertDialog.setCancelable(false);
+                                    alertDialog.show();
+                                }else {
+                                    final DialogInterface.OnClickListener updateClickListener = btnUpdateClickListener == null ? new UpdateClickListener(context, updateFrom, update.getUrlToDownload()) : btnUpdateClickListener;
+                                    final DialogInterface.OnClickListener disableClickListener = btnDisableClickListener == null ? new DisableClickListener(context) : btnDisableClickListener;
+
+                                    alertDialog = UtilsDisplay.showUpdateAvailableDialog(context, titleUpdate, getDescriptionUpdate(context, update, Display.DIALOG), btnDismiss, btnUpdate, btnDisable, updateClickListener, btnDismissClickListener, disableClickListener);
+                                    alertDialog.setCancelable(isDialogCancelable);
+                                    alertDialog.show();
+                                }
+
                                 break;
                             case SNACKBAR:
                                 snackbar = UtilsDisplay.showUpdateAvailableSnackbar(context, getDescriptionUpdate(context, update, Display.SNACKBAR), UtilsLibrary.getDurationEnumToBoolean(duration), updateFrom, update.getUrlToDownload());

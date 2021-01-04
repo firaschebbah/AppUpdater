@@ -77,6 +77,7 @@ public interface IAppUpdater {
      */
     AppUpdater showEvery(Integer times);
 
+
     /**
      * Set if the dialog, Snackbar or notification is displayed although there aren't updates. Default: false.
      *
